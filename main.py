@@ -2,77 +2,88 @@ from PyQt6 import uic
 from PyQt6.uic import loadUi
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
 import sys
+import autorization
+import register
+import login
+import kabinet
+from PyQt6 import QtWidgets
+import json
 
-from register import *
-from login import *
-from kabinet import *
-from PyQt6 import QtCore, QtGui, QtWidgets
-
-Form, Window = uic.loadUiType("autorization.ui")
 
 global input_log, input_pass
 
-app = QApplication([])
-window = Window()
-form = Form()
-form.setupUi(window)
-window.show()
-
-def auth_click():
-    global authorization
-    authorization = QtWidgets.QMainWindow()
-    form = Ui_authorization()
-    form.setupUi(authorization)
-    form.loginbtn.clicked.connect(login_OK_click)
-    window.close()
-    authorization.show()
-
-def reg_click():
-    global registration
-    registration = QtWidgets.QMainWindow()
-    form = Ui_registration()
-    form.setupUi(registration)
-    form.regbtn.clicked.connect(reg_OK_click)
-    window.close()
-    registration.show()
+app = QApplication(sys.argv)
+def open_main():
+    global main_window
+    global main_ui
+    main_window = QMainWindow()
+    main_ui = autorization.Ui_MainWindow()
+    main_ui.setupUi(main_window)
+    main_window.show()
 
 
-def reg_OK_click():
-    global kabinet
-    kabinet = QtWidgets.QMainWindow()
-    form = Ui_kabinet()
-    form.setupUi(kabinet)
-    form.exitkab.clicked.connect(exit_click)
-    registration.close()
-    kabinet.show()
+def open_auth():
+    global auth_window
+    global auth_ui
+    main_window.close()
+    auth_window = QMainWindow()
+    auth_ui = login.Ui_authorization()
+    auth_ui.setupUi(auth_window)
+    auth_window.show()
+    auth_ui.loginbtn.clicked.connect(handle_auth)
 
 
-def login_OK_click():
-    global authorization
-    form = Ui_authorization()
-    form.setupUi(authorization)
-    input_log = str(form.gettext())
-    input_pass = str(form.input_password.text())
-    with open('logins.txt') as f:
-        userdata = f.readline()
-        while userdata != input_log + "-" + input_pass and userdata != "":
-            userdata = f.readline()
-        if userdata is input_log + "-" + input_pass:
-            global kabinet
-            kabinet = QtWidgets.QMainWindow()
-            form = Ui_kabinet()
-            form.setupUi(kabinet)
-            form.exitkab.clicked.connect(exit_click)
-            authorization.close()
-            kabinet.show()
-        else:
-            print("хацкер")
+
+
+
+def open_reg():
+    global reg_window
+    global reg_ui
+    main_window.close()
+    reg_window = QMainWindow()
+    reg_ui = register.Ui_registration()
+    reg_ui.setupUi(reg_window)
+    reg_window.show()
+    reg_ui.regbtn.clicked.connect(handle_reg)
+
+def handle_reg():
+    user = {"login": reg_ui.new_login.text(), "password": reg_ui.new_pass.text()}
+    with open("cred.json", "r", encoding='utf-8') as file:
+        users = json.load(file)
+    with open("cred.json", "w", encoding='utf-8') as file:
+        users.append(user)
+        json.dump(users, file)
+        open_kab()
+        reg_window.close()
+
+
+def handle_auth():
+    user = {"login": auth_ui.input_login.text(), "password": auth_ui.input_password.text()}
+    with open("cred.json", "r", encoding='utf-8') as file:
+        users = json.load(file)
+    if user in users:
+        open_kab()
+        auth_window.close()
+    else:
+        print("Неправильный логин или пароль")
+
+def open_kab():
+    global kab_window
+    global kab_ui
+    kab_window = QMainWindow()
+    kab_ui = kabinet.Ui_kabinet()
+    kab_ui.setupUi(kab_window)
+    kab_ui.exitkab.clicked.connect(exit_click)
+    kab_window.show()
+
 
 def exit_click():
-    kabinet.close()
-    window.show()
+    kab_window.close()
+    main_window.show()
 
-form.pushButton.clicked.connect(auth_click)
-form.pushButton_2.clicked.connect(reg_click)
+open_main()
+
+main_ui.pushButton.clicked.connect(open_auth)
+main_ui.pushButton_2.clicked.connect(open_reg)
 
 app.exec()
