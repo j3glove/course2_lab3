@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_registration(object):
     def setupUi(self, registration):
         registration.setObjectName("registration")
-        registration.resize(552, 423)
+        registration.resize(552, 397)
         self.centralwidget = QtWidgets.QWidget(registration)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -27,12 +27,6 @@ class Ui_registration(object):
         font.setPointSize(16)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(0, 190, 231, 51))
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
         self.regbtn = QtWidgets.QPushButton(self.centralwidget)
         self.regbtn.setGeometry(QtCore.QRect(170, 270, 131, 71))
         font = QtGui.QFont()
@@ -45,9 +39,6 @@ class Ui_registration(object):
         self.new_pass = QtWidgets.QLineEdit(self.centralwidget)
         self.new_pass.setGeometry(QtCore.QRect(190, 140, 231, 41))
         self.new_pass.setObjectName("new_pass")
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_3.setGeometry(QtCore.QRect(190, 200, 231, 41))
-        self.lineEdit_3.setObjectName("lineEdit_3")
         registration.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(registration)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 552, 21))
@@ -65,7 +56,14 @@ class Ui_registration(object):
         registration.setWindowTitle(_translate("registration", "Окно регистрации"))
         self.label.setText(_translate("registration", "Введите логин:"))
         self.label_2.setText(_translate("registration", "Введите пароль:"))
-        self.label_3.setText(_translate("registration", "Повторите пароль:"))
         self.regbtn.setText(_translate("registration", "OK"))
 
 
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    registration = QtWidgets.QMainWindow()
+    ui = Ui_registration()
+    ui.setupUi(registration)
+    registration.show()
+    sys.exit(app.exec())
