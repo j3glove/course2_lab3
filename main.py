@@ -8,11 +8,15 @@ import login
 import kabinet
 from PyQt6 import QtWidgets
 import json
+from cypher import *
+import os.path
 
 
-global input_log, input_pass
+global input_log, input_pass, xor
 
 app = QApplication(sys.argv)
+
+
 def open_main():
     global main_window
     global main_ui
@@ -33,9 +37,6 @@ def open_auth():
     auth_ui.loginbtn.clicked.connect(handle_auth)
 
 
-
-
-
 def open_reg():
     global reg_window
     global reg_ui
@@ -46,26 +47,37 @@ def open_reg():
     reg_window.show()
     reg_ui.regbtn.clicked.connect(handle_reg)
 
+
 def handle_reg():
     user = {"login": reg_ui.new_login.text(), "password": reg_ui.new_pass.text()}
-    with open("cred.json", "r", encoding='utf-8') as file:
-        users = json.load(file)
+    if os.path.isfile("cred.json"):
+        with open("cred.json", "r", encoding='utf-8') as file:
+            users = json.loads(cypher(file.read(), key))
+    else:
+        users = []
     with open("cred.json", "w", encoding='utf-8') as file:
         users.append(user)
-        json.dump(users, file)
-        open_kab()
-        reg_window.close()
+        file.write(cypher(json.dumps(users), key))
+    open_kab()
+    reg_window.close()
 
 
 def handle_auth():
+    global x
     user = {"login": auth_ui.input_login.text(), "password": auth_ui.input_password.text()}
-    with open("cred.json", "r", encoding='utf-8') as file:
-        users = json.load(file)
+    if os.path.isfile("cred.json"):
+        with open("cred.json", "r", encoding='utf-8') as file:
+            users = json.loads(cypher(file.read(), key))
+    else:
+        users = []
     if user in users:
         open_kab()
         auth_window.close()
     else:
-        print("Неправильный логин или пароль")
+        msgBox = QMessageBox()
+        msgBox.setWindowTitle("Ошибка")
+        msgBox.setText("Вы ввели неправильный логин или пароль")
+        msgBox.exec()
 
 def open_kab():
     global kab_window
@@ -73,6 +85,10 @@ def open_kab():
     kab_window = QMainWindow()
     kab_ui = kabinet.Ui_kabinet()
     kab_ui.setupUi(kab_window)
+    with open("cred.json", "r", encoding='utf-8') as file:
+        users = json.loads(cypher(file.read(), key))
+    for user in users:
+        kab_ui.listWidget.addItem(str(user))
     kab_ui.exitkab.clicked.connect(exit_click)
     kab_window.show()
 
@@ -81,7 +97,9 @@ def exit_click():
     kab_window.close()
     main_window.show()
 
+
 open_main()
+
 
 main_ui.pushButton.clicked.connect(open_auth)
 main_ui.pushButton_2.clicked.connect(open_reg)
