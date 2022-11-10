@@ -16,7 +16,7 @@ class Ui_kabinet(object):
         self.centralwidget = QtWidgets.QWidget(kabinet)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(90, 120, 431, 151))
+        self.label.setGeometry(QtCore.QRect(80, 0, 461, 151))
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
         font.setPointSize(24)
@@ -26,6 +26,9 @@ class Ui_kabinet(object):
         self.exitkab.setGeometry(QtCore.QRect(10, 10, 75, 23))
         self.exitkab.setStyleSheet("background-color: #5555F5")
         self.exitkab.setObjectName("exitkab")
+        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
+        self.listWidget.setGeometry(QtCore.QRect(100, 120, 381, 301))
+        self.listWidget.setObjectName("listWidget")
         kabinet.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(kabinet)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 598, 21))
@@ -45,4 +48,11 @@ class Ui_kabinet(object):
         self.exitkab.setText(_translate("kabinet", "Выйти"))
 
 
-
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    kabinet = QtWidgets.QMainWindow()
+    ui = Ui_kabinet()
+    ui.setupUi(kabinet)
+    kabinet.show()
+    sys.exit(app.exec())

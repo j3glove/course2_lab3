@@ -17,9 +17,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>120</y>
-      <width>431</width>
+      <x>80</x>
+      <y>0</y>
+      <width>461</width>
       <height>151</height>
      </rect>
     </property>
@@ -47,6 +47,16 @@
     </property>
     <property name="text">
      <string>Выйти</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>381</width>
+      <height>301</height>
+     </rect>
     </property>
    </widget>
   </widget>
