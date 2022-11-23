@@ -63,7 +63,6 @@ def handle_reg():
 
 
 def handle_auth():
-    global x
     user = {"login": auth_ui.input_login.text(), "password": auth_ui.input_password.text()}
     if os.path.isfile("cred.json"):
         with open("cred.json", "r", encoding='utf-8') as file:
@@ -85,13 +84,32 @@ def open_kab():
     kab_window = QMainWindow()
     kab_ui = kabinet.Ui_kabinet()
     kab_ui.setupUi(kab_window)
-    with open("cred.json", "r", encoding='utf-8') as file:
-        users = json.loads(cypher(file.read(), key))
-    for user in users:
-        kab_ui.listWidget.addItem(str(user))
+    kab_ui.kabcyph.clicked.connect(show_cypher)
+    kab_ui.kabdecyph.clicked.connect(show_decypher)
+    kab_ui.cypher_btn.clicked.connect(output_cypher)
+    kab_ui.decypher_btn.clicked.connect(output_decypher)
     kab_ui.exitkab.clicked.connect(exit_click)
     kab_window.show()
 
+
+def show_cypher():
+    kab_ui.stackedWidget.setCurrentWidget(kab_ui.cypher_window)
+
+
+def show_decypher():
+    kab_ui.stackedWidget.setCurrentWidget(kab_ui.decypher_window)
+
+
+def output_cypher():
+    text = kab_ui.cypher_le.text()
+    with open('output.txt', "w", encoding='utf-8') as f:
+        f.write(cypher(text,key))
+
+
+def output_decypher():
+    text = kab_ui.decypher_le.text()
+    with open('output.txt', "w", encoding='utf-8') as f:
+        f.write(cypher(text, key))
 
 def exit_click():
     kab_window.close()
