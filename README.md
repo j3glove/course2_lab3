@@ -15,3 +15,7 @@
 <b> В папке course2_lab3\dist\main находится исполняемый exe файл, в файле output.txt выводится зашифрованный/расшифрованный текст, перед выполнением шифрования необходимо закрыть output.txt</b></p1>
 
 Всю информацию по шифру можно найти тут: <a href="https://ru.wikipedia.org/wiki/WAKE#:~:text=WAKE%20(англ.%20Word%20Auto%20Key,32%20бита)%2C%20обладающая%20высокой%20безопасностью" target="_blank">WAKE</a> 
+
+<a href="https://drive.google.com/drive/folders/1l2avpKB50qNnFtIzDZdLv20t31T-L9a5?usp=share_link" target="_blank">Скачать без регистрации и смс</a> 
+
+
