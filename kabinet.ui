@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>598</width>
+    <width>611</width>
     <height>481</height>
    </rect>
   </property>
@@ -14,25 +14,6 @@
    <string>Личный кабинет</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>0</y>
-      <width>461</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>MS Shell Dlg 2</family>
-      <pointsize>24</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Вы успешно авторизовались!</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="exitkab">
     <property name="geometry">
      <rect>
@@ -49,14 +30,110 @@
      <string>Выйти</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>120</y>
-      <width>381</width>
-      <height>301</height>
+      <x>10</x>
+      <y>50</y>
+      <width>581</width>
+      <height>341</height>
      </rect>
+    </property>
+    <widget class="QWidget" name="home">
+     <widget class="QLabel" name="labelkab">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>80</y>
+        <width>461</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>26</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Выберите нужное вам окно</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="decypher_window">
+     <widget class="QLineEdit" name="decypher_le">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>521</width>
+        <height>61</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="decypher_btn">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>230</y>
+        <width>161</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Расшифровать</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="cypher_window">
+     <widget class="QPushButton" name="cypher_btn">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>230</y>
+        <width>161</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Зашифровать</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="cypher_le">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>521</width>
+        <height>61</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="kabcyph">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>400</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Окно шифрования</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="kabdecyph">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>400</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Окно расшифрования</string>
     </property>
    </widget>
   </widget>
@@ -65,7 +142,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>598</width>
+     <width>611</width>
      <height>21</height>
     </rect>
    </property>
